@@ -7,23 +7,16 @@ import 'simplelightbox/dist/simple-lightbox.min.css'
 
 const galleryContainer = document.querySelector('.gallery');
 const galleryCards = createGalleryCards(galleryItems);
-
 galleryContainer.insertAdjacentHTML('beforeend', galleryCards);
 
 function createGalleryCards(galleryItems) {
     return galleryItems
         .map(({ preview, original, description }) => {
         return `
-        <div class="gallery__item">
-            <a class="gallery__link" href="${original}">
-            <img
-            class="gallery__image"
-            src= "${preview}"
-            data-source="${original}"
-            alt="${description}"
-            />
-            </a>
-        </div>
+        <a class="gallery__item" href="${original}">
+        <img class="gallery__image" src="${preview}" 
+        alt="${description}" />
+        </a>
         `;
         }).join('');
        
@@ -39,16 +32,10 @@ function onClickPreviewCard(event) {
     if (!classGalleryLink) {
         return;
     }
-    const instance = basicLightbox.create(`
-    <img src="${event.target.dataset.source}" width="800" height="600">
-`)
-    
-    instance.show();
-
 
     function onCloseModal() {
         window.removeEventListener('keydown', onEscPress);
-        instance.close();
+        
     }
 
     function onEscPress(event) {
@@ -57,5 +44,11 @@ function onClickPreviewCard(event) {
             return onCloseModal();
         }
     }
-}
+  }
+
+const lightbox = new SimpleLightbox('.gallery a', {  captions: true,
+  captionsData: 'alt',
+    captionDelay: 250,
+});
+  
 console.log(galleryItems);
