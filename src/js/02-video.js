@@ -6,11 +6,6 @@ const CURRENT_TIME = 'videoplayer-current-time';
 const iframe = document.querySelector('#vimeo-player');
 const player = new vimeoPlayer(iframe);
 
-const chk = document.getElementById('chk');
-
-chk.addEventListener('change', () => {
-	document.body.classList.toggle('dark');
-});
 
 player.on('timeupdate', throttle(onPlay, 1000));
 
