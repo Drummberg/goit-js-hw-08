@@ -51,4 +51,4 @@ const lightbox = new SimpleLightbox('.gallery a', {  captions: true,
     captionDelay: 250,
 });
   
-console.log(galleryItems);
+
